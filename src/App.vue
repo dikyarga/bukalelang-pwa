@@ -4,7 +4,7 @@
       <span>BukaLelang</span>
     </header>
     <main>
-      <img src="./assets/logo.png" alt="Vue.js PWA">
+      <img src="./assets/bukalelang-logo.png" alt="BukaLelang Logo" width="150">
       <router-view></router-view>
     </main>
   </div>
