@@ -22,6 +22,18 @@
             <v-list-tile-title v-text="item.title"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile
+          value="true"
+          @click="logout"
+          v-if="isLoggedInMenu"
+        >
+          <v-list-tile-action>
+            <v-icon light>bubble_chart</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Log Out</v-list-tile-title>
+          </v-list-tile-content> 
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar dark class="primary">
@@ -35,11 +47,14 @@
         class="hidden-sm-and-down"
       >
         <v-btn flat
-        v-for="(item, i) in menuItems"
-        :key="i"
-        :to="item.link">{{ item.title }}
+          v-for="(item, i) in menuItems"
+          :key="i"
+          :to="item.link">{{ item.title }}
         </v-btn>
-
+        <v-btn flat
+          v-if="isLoggedIn"
+          @click="logout"
+        >Logout</v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <main>
@@ -52,8 +67,7 @@
 </template>
 
 <script>
-
-let defaultMenuItems = [
+const menuItems = [
   { icon: 'bubble_chart', title: 'Login', link: '/login' },
   { icon: 'bubble_chart', title: 'Sign Up', link: '/register' },
 ]
@@ -63,21 +77,36 @@ let defaultMenuItems = [
         clipped: false,
         drawer: false,
         fixed: true,
-        menuItems: defaultMenuItems,
+        menuItems: [],
         miniVariant: false,
         right: true,
         rightDrawer: false,
         title: 'Si Sigap'
       }
     },
-    mounted() {
+    created() {
 
     },
     computed: {
-
+      isLoggedInMenu() {
+        if (!this.$store.getters.user) {
+          this.isLoggedIn = false
+          this.menuItems = menuItems
+          console.log('belom login')
+          return false
+        } else {
+          console.log('udah login')
+          this.isLoggedIn = true
+          this.menuItems = []
+          return true
+        }
+      }
     },
     methods: {
-
+      logout() {
+        this.$store.dispatch('logout')
+        this.menuItems = menuItems
+      }
     }
   }
 </script>
