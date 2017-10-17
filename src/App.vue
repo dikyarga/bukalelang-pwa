@@ -1,54 +1,87 @@
 <template>
-  <div id="app">
-    <header>
-      <span>BukaLelang</span>
-    </header>
+  <v-app light>
+    <v-navigation-drawer
+      persistent
+      :mini-variant="miniVariant"
+      :clipped="clipped"
+      v-model="drawer"
+      enable-resize-watcher
+    >
+      <v-list>
+        <v-list-tile
+          v-for="(item, i) in menuItems"
+          :key="i"
+          value="true"
+          router
+          :to="item.link"
+        >
+          <v-list-tile-action>
+            <v-icon light v-html="item.icon"></v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title v-text="item.title"></v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar dark class="primary">
+      <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-xs-and-up"></v-toolbar-side-icon>
+
+      <v-toolbar-title>
+        <!-- <router-link :to="homeOrDashboard" tag="span" style="cursor: pointer">{{ title }}</router-link> -->
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items
+        class="hidden-sm-and-down"
+      >
+        <v-btn flat
+        v-for="(item, i) in menuItems"
+        :key="i"
+        :to="item.link">{{ item.title }}
+        </v-btn>
+
+      </v-toolbar-items>
+    </v-toolbar>
     <main>
-      <img src="./assets/bukalelang-logo.png" alt="BukaLelang Logo" width="150">
       <router-view></router-view>
     </main>
-  </div>
+    <v-footer :fixed="fixed">
+      <span>&copy; 2017 : {{ title }}  </span>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+
+let defaultMenuItems = [
+  { icon: 'bubble_chart', title: 'Login', link: '/login' },
+  { icon: 'bubble_chart', title: 'Sign Up', link: '/register' },
+]
+  export default {
+    data () {
+      return {
+        clipped: false,
+        drawer: false,
+        fixed: true,
+        menuItems: defaultMenuItems,
+        miniVariant: false,
+        right: true,
+        rightDrawer: false,
+        title: 'Si Sigap'
+      }
+    },
+    mounted() {
+
+    },
+    computed: {
+
+    },
+    methods: {
+
+    }
+  }
 </script>
 
-<style>
-body {
-  margin: 0;
-}
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-main {
-  text-align: center;
-  margin-top: 40px;
-}
-
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: #d71149;
-  color: #ffffff;
-}
-
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
-}
+<style lang="stylus">
+  @import './stylus/main.styl'
 </style>
