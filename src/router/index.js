@@ -23,6 +23,6 @@ export default new Router({
           component: HomepageIndex
         }
       ]
-    }
+    },
   ]
 })
