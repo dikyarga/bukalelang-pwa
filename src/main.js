@@ -11,7 +11,7 @@ import Vuetify from 'vuetify'
 import App from './App'
 import router from './router'
 import { store } from './store'
-
+import push from './push'
 
 Vue.config.productionTip = false
 require('../node_modules/vuetify/dist/vuetify.min.css')
@@ -26,8 +26,10 @@ new Vue({
   template: '<App/>',
   components: { App },
   created() {
+    push()
 
     firebase.app.auth().onAuthStateChanged(user => {
+
       if (user) {
         // this.$store.commit('setUser', user)
         this.$store.dispatch('autoSignIn', user)

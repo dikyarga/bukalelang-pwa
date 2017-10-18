@@ -13,6 +13,8 @@ import * as firebase from '../firebase/config'
 
 let usersCollection = firebase.usersCollection
 
+// const messaging = firebase.messaging()
+
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -54,6 +56,7 @@ export const store = new Vuex.Store({
             console.log('logout berhasil')
             firebase.app.auth().signOut()
                 .then(() => {
+                    
                     router.push('/')
                 })
             commit('setUser', null)

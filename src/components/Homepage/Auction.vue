@@ -8,7 +8,7 @@
         >
         </v-card-media>
         <v-card-title primary-title>
-          <div width="100%">
+          <div >
             <div class="headline">Top western road trips</div>
             <span class="grey--text">1,000 miles of wonder</span>
           </div>
@@ -28,23 +28,17 @@
         </v-slide-y-transition>
       </v-card>
     </v-flex>
-  </div>
+        </div>
 </template>
 
 <script>
 export default {
-  name: 'Audtions',
+  name: 'Auction',
   data: () => {
     return {
-      autions: [],
       show: true,
+
     }
   },
-  created: {
-    
-  },
-  methods: {
-
-  }
 }
 </script>
