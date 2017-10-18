@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import router from '../router'
+
 import * as firebase from 'firebase'
 
 Vue.use(Vuex)
@@ -17,10 +19,16 @@ export const store = new Vuex.Store({
     actions:{
         registerUser ({commit}, payload) {
             firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
-                .catch(err => console.log(err.message, 'registerError'))
+            .then((user) => {
+                router.push('/')
+            })
+            .catch(err => console.log(err.message, 'registerError'))
         },
         loginUser ({commit}, payload) {
             firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+                .then((user) => {
+                    router.push('/')
+                })
                 .catch(err => console.log(err.message, 'loginError'))
         },
         autoSignIn ({commit}, payload) {
@@ -29,6 +37,9 @@ export const store = new Vuex.Store({
         logout ({commit}, payload) {
             console.log('logout berhasil')
             firebase.auth().signOut()
+                .then(() => {
+                    router.push('/')
+                })
             commit('setUser', null)
         },
     },
