@@ -2,7 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as firebase from 'firebase'
+// import * as firebase from 'firebase'
+// import 'firebase/firestore'
+import * as firebase from './firebase/config'
+
 import Vuetify from 'vuetify'
 
 import App from './App'
@@ -23,18 +26,8 @@ new Vue({
   template: '<App/>',
   components: { App },
   created() {
-    const config = {
-      apiKey: "AIzaSyBl1x_7NdJFoQp2yS-WSBnRPgih8etkQJY",
-      authDomain: "bukalelang-3d2a3.firebaseapp.com",
-      databaseURL: "https://bukalelang-3d2a3.firebaseio.com",
-      projectId: "bukalelang-3d2a3",
-      storageBucket: "bukalelang-3d2a3.appspot.com",
-      messagingSenderId: "373989807666"
-    };
-    firebase.initializeApp(config)
 
-    firebase.auth().onAuthStateChanged(user => {
-      console.log('first ?', user)
+    firebase.app.auth().onAuthStateChanged(user => {
       if (user) {
         // this.$store.commit('setUser', user)
         this.$store.dispatch('autoSignIn', user)

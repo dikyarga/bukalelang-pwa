@@ -1,9 +1,7 @@
 <template>
 <section>
         <v-layout
-          column
-          wrap
-          class="my-5"
+          row
           align-center
         >
         <landing-page v-if="!isLoggedIn"/>

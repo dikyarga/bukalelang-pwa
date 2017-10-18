@@ -11,10 +11,25 @@
               <v-layout row wrap align-center>
                 <v-flex xs12 md4>
                     <h2>Register</h2>
-                    <v-form v-model="valid" ref="form" lazy-validation>
+                    <v-form ref="form">
                         <v-text-field
                             label="E-mail"
                             v-model="email"
+                            required
+                        ></v-text-field>
+                        <v-text-field
+                            label="Username"
+                            v-model="username"
+                            required
+                        ></v-text-field>
+                        <v-text-field
+                            label="Phone"
+                            v-model="phone"
+                            required
+                        ></v-text-field>
+                        <v-text-field
+                            label="Image URL"
+                            v-model="imageUrl"
                             required
                         ></v-text-field>
                         <v-text-field
@@ -43,23 +58,21 @@ export default {
         return {
             email: '',
             password: '',
-            valid: true,
-            emailRules: [
-                (v) => !!v || 'E-mail is required',
-                (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-            ],
-            passwordRules: [
-                (v) => !!v || 'Name is required'
-            ]
+            phone: '',
+            imageUrl: '',
+            username: '',
         }
     },
     methods: {
         register () {
             this.$store.dispatch('registerUser', {
                 email: this.email,
-                password: this.password
+                password: this.password,
+                username: this.username,
+                phone: this.phone,
+                imageUrl: this.imageUrl,
             })
-            
+
         },
         clear () {
             this.$refs.form.reset()

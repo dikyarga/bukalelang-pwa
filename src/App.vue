@@ -32,7 +32,7 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Log Out</v-list-tile-title>
-          </v-list-tile-content> 
+          </v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
@@ -40,8 +40,9 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-xs-and-up"></v-toolbar-side-icon>
 
       <v-toolbar-title>
-        <!-- <router-link :to="homeOrDashboard" tag="span" style="cursor: pointer">{{ title }}</router-link> -->
+        <router-link :to="'/'" tag="span" style="cursor: pointer">{{ title }}</router-link>
       </v-toolbar-title>
+       <!-- <v-text-field prepend-icon="search" label="Cari lelang..." hide-details single-line dark class="pr-10"></v-text-field> -->
       <v-spacer></v-spacer>
       <v-toolbar-items
         class="hidden-sm-and-down"
@@ -81,7 +82,7 @@ const menuItems = [
         miniVariant: false,
         right: true,
         rightDrawer: false,
-        title: 'Si Sigap'
+        title: 'BukaLelang PWA'
       }
     },
     created() {
