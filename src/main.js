@@ -5,6 +5,8 @@ import Vuex from 'vuex'
 // import * as firebase from 'firebase'
 // import 'firebase/firestore'
 import * as firebase from './firebase/config'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 import Vuetify from 'vuetify'
 
@@ -17,6 +19,7 @@ Vue.config.productionTip = false
 require('../node_modules/vuetify/dist/vuetify.min.css')
 
 Vue.use(Vuetify)
+Vue.use(VueAxios, axios)
 
 /* eslint-disable no-new */
 new Vue({
@@ -25,11 +28,10 @@ new Vue({
   store,
   template: '<App/>',
   components: { App },
-  created() {
+  beforeCreate() {
     push()
 
     firebase.app.auth().onAuthStateChanged(user => {
-
       if (user) {
         // this.$store.commit('setUser', user)
         this.$store.dispatch('autoSignIn', user)

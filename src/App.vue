@@ -68,10 +68,15 @@
 </template>
 
 <script>
-const menuItems = [
+const menuItemsNotLoggedIn = [
   { icon: 'bubble_chart', title: 'Login', link: '/login' },
   { icon: 'bubble_chart', title: 'Sign Up', link: '/register' },
 ]
+
+const menuItemsLoggedIn = [
+  { icon: 'bubble_chart', title: 'Create Auction', link: '/create-auction' },
+]
+
   export default {
     data () {
       return {
@@ -92,13 +97,13 @@ const menuItems = [
       isLoggedInMenu() {
         if (!this.$store.getters.user) {
           this.isLoggedIn = false
-          this.menuItems = menuItems
+          this.menuItems = menuItemsNotLoggedIn
           console.log('belom login')
           return false
         } else {
           console.log('udah login')
           this.isLoggedIn = true
-          this.menuItems = []
+          this.menuItems = menuItemsLoggedIn
           return true
         }
       }
@@ -106,7 +111,7 @@ const menuItems = [
     methods: {
       logout() {
         this.$store.dispatch('logout')
-        this.menuItems = menuItems
+        this.menuItems = menuItemsNotLoggedIn
       }
     }
   }

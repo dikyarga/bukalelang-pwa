@@ -15,15 +15,24 @@ let usersCollection = firebase.usersCollection
 
 // const messaging = firebase.messaging()
 
+
 Vue.use(Vuex)
+
+const API_DOMAIN = 'https://us-central1-blmockup.cloudfunctions.net/getUserAuctions'
+const GET_USER_AUCTION = `${API_DOMAIN}/getUserAuctions`
 
 export const store = new Vuex.Store({
     state: {
         user: null,
+        userAuctions: []
     },
     mutations: {
         setUser (state, payload) {
             state.user = payload
+        },
+        setUserAuctions (state, payload) {
+            console.log(payload, 'payload user actions')
+            state.userAuctions = payload
         }
     },
     actions:{
@@ -33,7 +42,7 @@ export const store = new Vuex.Store({
               console.log('all payload : ', payload);
               delete payload.password
               usersCollection.add(payload).then(user => {
-                console.log('the user detail : ', user);
+                commit('setUser', {id: payload.uid})
                 router.push('/')
 
               }).catch(err => {
@@ -55,16 +64,26 @@ export const store = new Vuex.Store({
         logout ({commit}, payload) {
             console.log('logout berhasil')
             firebase.app.auth().signOut()
-                .then(() => {
-                    
+                .then(() => {     
                     router.push('/')
                 })
             commit('setUser', null)
         },
+        getUserAuction ({commit, state}, payload) {
+            const query = '?userId=ego'//+state.user.id
+            Vue.axios.get(GET_USER_AUCTION+query)
+                .then((response) => {
+                    commit('setUserAuctions', response.data)
+                })
+                .catch(err => console.log(err.message, 'getUserAuctionsError'))
+        }
     },
     getters: {
         user(state) {
             return state.user
+        },
+        userAuctions(state) {
+            return state.userAuctions
         }
     }
 })
