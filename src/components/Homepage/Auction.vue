@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'Audtions',
+  name: 'Auction',
 }
 </script>
 

@@ -8,6 +8,8 @@ import Vuetify from 'vuetify'
 import App from './App'
 import router from './router'
 import { store } from './store'
+import push from './push'
+
 
 
 Vue.config.productionTip = false
@@ -32,7 +34,8 @@ new Vue({
       messagingSenderId: "373989807666"
     };
     firebase.initializeApp(config)
-
+    push()
+   
     firebase.auth().onAuthStateChanged(user => {
       console.log('first ?', user)
       if (user) {

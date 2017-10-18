@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
 import Login from '@/components/Auth/Login'
 import Register from '@/components/Auth/Register'
 
@@ -33,8 +32,8 @@ export default new Router({
           path: 'register',
           name: 'Register',
           component: Register
-        },
+        }
       ]
-    },
+    }
   ]
 })

@@ -5,6 +5,8 @@ import router from '../router'
 
 import * as firebase from 'firebase'
 
+// const messaging = firebase.messaging()
+
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -38,6 +40,7 @@ export const store = new Vuex.Store({
             console.log('logout berhasil')
             firebase.auth().signOut()
                 .then(() => {
+                    
                     router.push('/')
                 })
             commit('setUser', null)
