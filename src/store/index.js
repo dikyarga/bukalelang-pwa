@@ -78,17 +78,26 @@ export const store = new Vuex.Store({
                 .catch(err => console.log(err.message, 'getUserAuctionsError'))
         },
         createUserAuction ({commit, state}, payload) {
-            console.log('ketrigger')
             const URL = 'https://us-central1-bukalelang-3d2a3.cloudfunctions.net/newUserAuctions'
-            Vue.axios.post(URL, {
-                userId: state.user.id,
-                ...payload.auctionData
+            const auctionData = {
+                userId: 'IYsbQmcjaOdUBIJs4LsbVv7jBc63',//state.user.id,
+                auction: {
+                    description: payload.description_bb,
+                    ...payload
+                }
+            }
+            console.log(auctionData)
+            router.push('/')
+            Vue.axios({
+                url: URL,
+                data: auctionData,
+                method: 'POST'
             })
-            .then((response) => {
-                console.log(response, 'response buka lelang')
-                // commit('setUserAuctions', response.data)
-            })
-            .catch(err => console.log(err.message, 'getUserAuctionsError'))
+                .then((response) => {
+                    console.log(response, 'response buka lelang')
+                    // commit('setUserAuctions', response.data)
+                })
+                .catch(err => console.log(err.message, 'getUserAuctionsError'))
         }
     },
     getters: {

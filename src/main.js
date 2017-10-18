@@ -37,7 +37,7 @@ new Vue({
         this.$store.dispatch('autoSignIn', user)
         // this.$store.dispatch('loadAuction')
       } else {
-        this.$store.dispatch('errorLogin')
+        this.$store.dispatch('errorLogin', user)
       }
     })
   }
